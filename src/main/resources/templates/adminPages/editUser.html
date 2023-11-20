@@ -1,0 +1,120 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/dashboard/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/dashboard/img/favicon.png}">
+
+    <!--    script files for modal form-->
+    <title>
+        Update User
+    </title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+    <!-- Nucleo Icons -->
+    <link th:href="@{/dashboard/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/dashboard/css/nucleo-svg.css}" rel="stylesheet"/>
+    <link th:href="@{/css/profile.css}" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-qbNBs/Gbj7oqT5XVxRtHpGQa/NJ5iSxFGmJ4U9xgFkXH2z4szKEK2O7UQlTisT1GRQaWkqKM/qc24mrW4I4auQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+<aside style="background-color: rgb(61 64 91)"
+       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+       id="sidenav-main">
+    <div th:include="fragments/admin_aside::sidenav"></div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div th:include="fragments/admin_aside::collapseNav"></div>
+    <div th:include="fragments/admin_aside::sidenav-footer"></div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <div th:include="fragments/admin_aside::navDashboard"></div>
+    <!-- End Navbar -->
+
+    <!--    start user information for Update-->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class=" card my-4 container-fluid col-md-6 border p-3">
+                <form th:action="@{/admin/updateUser}" method="post" th:object="${user}">
+                    <!-- Hidden input for user ID -->
+                    <fieldset>
+                        <p class="align-content-center text-bold text-center">Update User</p>
+                        <input type="hidden" name="id" th:value="${user.id}">
+                        <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" role="alert">
+                            <small th:each="error : ${#fields.errors('email')}" th:text="${error}"></small>
+                        </div>
+
+                        <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" role="alert">
+                            <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="fname">First Name</label>
+                            <input type="text" class="form-control bg-white border pl-2" id="fname" required
+                                   name="firstName" th:value="${user.firstName}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="lname">Last Name</label>
+                            <input type="text" class="form-control bg-white border pl-2" id="lname" required
+                                   name="lastName" th:value="${user.lastName}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control bg-white border pl-2" id="email" required
+                                   name="email" th:value="${user.email}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control bg-white border pl-2" id="username" required
+                                   name="username" readonly th:value="${user.username}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control bg-white border pl-2" id="password" required
+                                   name="password" th:value="${user.password}">
+                        </div>
+                        <div class="form-group mb-3">
+                                    <span class="input-group-text">
+                                        <input type="checkbox" class="m-2" id="showPassword"> Show Password
+                                    </span>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Save</button>
+                        <!-- Cancel button that goes back to the previous page -->
+                        <a href="javascript:history.go(-1);" class="btn btn-secondary ml-2">Cancel</a>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--    End user information for Update-->
+</main>
+<div th:replace="fragments/admin_aside::settings"></div>
+<!--   Core JS Files   -->
+<script th:src="@{/dashboard/js/plugins/perfect-scrollbar.min.js}"></script>
+<script src="/dashboard/js/material-dashboard.min.js?v=3.0.0"></script>
+<script>
+    const passwordInput = document.getElementById('password');
+    const showPasswordCheckbox = document.getElementById('showPassword');
+
+    showPasswordCheckbox.addEventListener('change', function () {
+        passwordInput.type = this.checked ? 'text' : 'password';
+    });
+</script>
+</body>
+
+</html>

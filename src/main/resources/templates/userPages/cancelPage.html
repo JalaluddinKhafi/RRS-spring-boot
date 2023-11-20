@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancel Ticket Confirmation</title>
+    <!-- Add necessary scripts and styles here -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        function confirmCancellation(ticketId) {
+            Swal.fire({
+                title: 'Confirm Cancellation',
+                text: 'Are you sure you want to cancel this ticket?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, cancel it!',
+                cancelButtonText: 'No, go back'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // User clicked "Yes", execute the cancellation via AJAX
+                    cancelTicket(ticketId);
+                } else {
+                    // User clicked "No" or closed the alert, redirect to the ticket list page
+                    window.location.href = '/passengerTickets';
+                }
+            });
+        }
+
+        function cancelTicket(ticketId) {
+            // Use AJAX to call the cancellation endpoint
+            $.ajax({
+                url: '/confirmCancelTicket/' + ticketId,
+                type: 'GET',
+                success: function () {
+                    // Cancellation was successful, show a success alert
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'The ticket has been canceled successfully.',
+                        icon: 'success'
+                    }).then(() => {
+                        // Redirect to the ticket list page
+                        window.location.href = '/passengerTickets';
+                    });
+                },
+                error: function () {
+                    // Handle error if the cancellation fails
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'An error occurred while canceling the ticket.',
+                        icon: 'error'
+                    });
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<!-- Content for the confirmation page, if needed -->
+<script>
+    // Call the function when the page loads
+    confirmCancellation([[${ticketId}]]);
+</script>
+</body>
+</html>

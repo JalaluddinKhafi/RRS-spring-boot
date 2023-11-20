@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        Passenger Tickets
+    </title>
+
+    <!-- Optional: Add your own styling for the logo and buttons -->
+    <style>
+        .ticket-card {
+            background-color: #f8f9fa; /* Light background color */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: #e22e6e; /* Header background color */
+            color: white; /* Header text color */
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .logo {
+            max-width: 40px; /* Adjust the logo size */
+            margin-right: 3px; /* Add space between logo and text */
+            max-height: 40px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .font-weight-bold {
+            /* Your existing bold style */
+            font-weight: bold;
+        }
+
+        .print-button {
+            margin-top: 15px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                visibility: hidden;
+            }
+
+            .ticket-card {
+                visibility: visible;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="page-style" href="/dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+<aside style="background-color: rgb(61 64 91)"
+       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+       id="sidenav-main">
+    <div th:include="fragments/aside::sidenav"></div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div th:include="fragments/aside::collapseNav"></div>
+    <div th:include="fragments/aside::sidenav-footer"></div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-full">
+    <!-- Navbar -->
+    <div th:include="fragments/aside::navDashboard"></div>
+    <!-- End Navbar -->
+    <!--body for content started-->
+<!--    <div class="container-fluid py-4">-->
+<!--        <div class="row w-screen">-->
+<!--            <div class="col-12">-->
+<!--                <div class="card my-4 container-fluid">-->
+
+    <div class=" custom-container mx-auto outline-1  mt-4" style="max-width: 600px !important;">
+        <h2 class="text-center mb-4">All Tickets</h2>
+
+        <!-- Iterate over the list of tickets and create a decorated card for each ticket -->
+        <div th:each="ticket : ${tickets}" class="ticket-card card mb-4" th:id="'ticket-' + ${ticket.id}">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title font-weight-bold mb-0 mr-2">Ticket Details</h5>
+                <img src="/images/logo.png" alt="Logo" class="img-fluid logo" />
+            </div>
+
+
+            <!-- Card body with ticket details -->
+            <div class="card-body">
+                <!-- Display ticket number in bold -->
+                <p class="card-text font-weight-bold" th:text="'Ticket Number: . . . . . . . . . . . . . . . . . . . .  ' + ${ticket.id}"></p>
+                <hr>
+                <!-- Display passenger and train details -->
+                <p class="card-text font-weight-bold" th:text="'Passenger: . . . . . . . . . . . . . . . . . . . . . . . .   ' + ${ticket.passenger.firstName} + ' ' + ${ticket.passenger.lastName}"></p>
+                <p class="card-text font-weight-bold" th:text="'Number of Seat: . . . . . . . . . . . . . . . . . . . .     ' + ${ticket.passenger.numberOfSeat}"></p>
+                <p class="card-text font-weight-bold" th:text="'Train: . . . . . . . . . . . . . . . . . . . . . . . . . . . .    ' + ${ticket.train.name}"></p>
+                <p class="card-text font-weight-bold" th:text="'Train ID: . . . . . . . . . . . . . . . . . . . . . . . . . . .     ' + ${ticket.train.id}"></p>
+                <p class="card-text font-weight-bold" th:text="'Source-Destination: . . . . . . . . . . . . . . . . .     ' + ${ticket.train.trainStatus.route.source} + ' to ' + ${ticket.train.trainStatus.route.destination}"></p>
+                <p class="card-text font-weight-bold" th:text="'Date of Journey: . . . . . . . . . . . . . . . . . . . .     ' + ${ticket.train.trainStatus.departureDate}"></p>
+                <p class="card-text font-weight-bold" th:text="'Time of Journey: . . . . . . . . . . . . . . . . . . . .     ' + ${ticket.train.trainStatus.departureTime}"></p>
+                <p class="card-text font-weight-bold" th:text="'Total Price: . . . . . . . . . . . . . . . . . . . .     ' + ${ticket.passenger.totalPrice} + ${ticket.train.currencySymbol}"></p>
+
+                <!-- Add other ticket details as needed -->
+
+                <!-- Buttons for print and cancel -->
+            </div>
+
+            <div class="text-center mt-3" style="width: 100%;">
+                <button type="button" class="btn btn-success mr-2 print-button" th:onclick="'printTicket(\'ticket-' + ${ticket.id} + '\')'">Print</button>
+                <a th:href="@{/cancelTicket/{id}(id=${ticket.id})}">
+                    <button type="button" class="btn btn-danger print-button">Cancel</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<div th:replace="fragments/aside::settings"></div>
+<!--   Core JS Files   -->
+<script th:src="@{/dashboard/js/plugins/perfect-scrollbar.min.js}"></script>
+<script src="/dashboard/js/material-dashboard.min.js?v=3.0.0"></script>
+
+
+<!-- javaScript to trigger the print button-->
+<!-- Add jsPDF and html2canvas libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<!-- JavaScript to trigger the print and convert to PDF buttons -->
+<script>
+    function printTicket(ticketId) {
+        var printContents = document.getElementById(ticketId).outerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+</body>
+</html>
+
+
+

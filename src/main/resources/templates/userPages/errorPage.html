@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        function displayErrorMessageAndRedirect() {
+            // Retrieve the error message from the hidden element
+            var errorMessage = document.getElementById("errorMessage").textContent;
+
+            // Display a SweetAlert2 error popup
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'OK',
+            }).then(() => {
+                // Redirect back to the previous page
+                window.history.back();
+            });
+        }
+
+        // Call the function when the page loads
+        window.onload = displayErrorMessageAndRedirect;
+    </script>
+</head>
+<body>
+<!-- Hidden element to store the error message -->
+<div id="errorMessage" th:text="${errorMessage}" style="display: none;"></div>
+</body>
+</html>

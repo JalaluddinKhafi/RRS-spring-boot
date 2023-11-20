@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/dashboard/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/dashboard/img/favicon.png}">
+    <title>
+        Schedule
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="page-style" href="/dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+<aside style="background-color: rgb(61 64 91)"
+       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+       id="sidenav-main">
+    <div th:include="fragments/aside::sidenav"></div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div th:include="fragments/aside::collapseNav"></div>
+    <div th:include="fragments/aside::sidenav-footer"></div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <div th:include="fragments/aside::navDashboard"></div>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-center">Schedule</h3>
+        </div>
+        <div class="container">
+            <table id="example" class="table table-striped border" style="width:100%; font-size: 14px;">
+                <thead class="thead-light">
+            <tr>
+                <th>Train ID</th>
+                <th>Train Name</th>
+                <th>Available Seat</th>
+                <th>Booked Seat</th>
+                <th>Price</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Departure Date</th>
+                <th>Departure Time</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="schedule : ${schedules}">
+                <td th:text="${schedule.train.id}"></td>
+                <td th:text="${schedule.train.name}"></td>
+                <td th:text="${schedule.availableSeat}"></td>
+                <td th:text="${schedule.bookedSeat}"></td>
+                <td th:text="${schedule.train.price} + ${schedule.train.currencySymbol}"></td>
+                <td th:text="${schedule.route.source}"></td>
+                <td th:text="${schedule.route.destination}"></td>
+                <td th:text="${schedule.departureDate}"></td>
+                <td th:text="${schedule.departureTime}"></td>
+                <td>
+                    <a class="m-3" th:href="@{/book/{id}(id=${schedule.train.id})}">
+                        <button class="btn btn-success mr" type="submit">Book</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</main>
+<div th:replace="fragments/aside::settings"></div>
+<!--   Core JS Files   -->
+<script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script defer th:src="@{/js/tableJs.js}"></script>
+<script th:src="@{/dashboard/js/plugins/perfect-scrollbar.min.js}"></script>
+<script src="/dashboard/js/material-dashboard.min.js?v=3.0.0"></script>
+</body>
+
+</html>

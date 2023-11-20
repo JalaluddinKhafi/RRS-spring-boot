@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/dashboard/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/dashboard/img/favicon.png}">
+  <title>
+    Admin Controller Page
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="page-style" href="/dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+<aside style="background-color: rgb(61 64 91)" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+  <div th:include="fragments/aside::sidenav"></div>
+  <hr class="horizontal light mt-0 mb-2">
+  <div th:include="fragments/aside::collapseNav"></div>
+  <div th:include="fragments/aside::sidenav-footer"></div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      <div th:include="fragments/aside::navDashboard"></div>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+<!--start body of the user dashboard-->
+
+      <div class="col-12">
+        <h2 class="text-center mb-4">Welcome to Your Dashboard!</h2>
+        <p class="text-center">We're excited to have you here. Explore the features and insights tailored just for you.</p>
+      </div>
+
+
+<!--      end body of the user dashboard-->
+    </div>
+  </main>
+  <!--   Core JS Files   -->
+<div th:replace="fragments/aside::settings"></div>
+<!--   Core JS Files   -->
+<script th:src="@{/dashboard/js/plugins/perfect-scrollbar.min.js}"></script>
+<script src="/dashboard/js/material-dashboard.min.js?v=3.0.0"></script>
+</body>
+
+</html>

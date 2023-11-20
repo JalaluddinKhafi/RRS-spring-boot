@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>All Routes</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
+
+    <link th:href="@{/css/templatemo-tiya-golf-club.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/topNav::navbar">
+</div>
+
+<div class="container my-5 col-md-8 pt-5 border rounded p-4">
+    <h2 class="text-center mb-4 font-weight-bold">All Routes</h2>
+    <table id="example" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+                <th>Route ID</th>
+                <th>Source</th>
+                <th>Destination</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="route :${allRoutes}">
+                <td th:text="${route.id}"></td>
+                <td th:text="${route.source}"></td>
+                <td th:text="${route.destination}"></td>
+
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Route ID</th>
+                <th>Source</th>
+                <th>Destination</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script defer th:src="@{/js/tableJs.js}"></script>
+    </body>
+</html>
+
