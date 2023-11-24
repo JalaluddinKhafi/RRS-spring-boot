@@ -20,12 +20,14 @@ public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final TrainStatusService trainService;
     private final PassengerService passengerService;
+    private final EmailService emailService;
 
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository, TrainStatusService trainService, PassengerService passengerService) {
+    public TicketServiceImpl(TicketRepository ticketRepository, TrainStatusService trainService, PassengerService passengerService, EmailService emailService) {
         this.ticketRepository = ticketRepository;
         this.trainService = trainService;
         this.passengerService = passengerService;
+        this.emailService = emailService;
     }
 
     // ... other methods ...
@@ -64,6 +66,7 @@ public class TicketServiceImpl implements TicketService {
 
             // Save the ticket
             ticketRepository.save(ticket);
+            emailService.sendTicketConfirmationEmail(ticket.getUser().getEmail(), ticket);
         }
     }
     @Override

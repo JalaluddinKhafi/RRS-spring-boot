@@ -88,11 +88,13 @@ public class HomeController {
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
-                        RedirectAttributes attributes) {
+                        RedirectAttributes attributes,
+                        HttpSession session) {
 
         User user = userService.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             System.out.println("Login page is started !!! "+" Password"+user.getPassword());
+            session.setAttribute("id",user.getId());
             return "redirect:/user/userHomePage";
 
         } else {
