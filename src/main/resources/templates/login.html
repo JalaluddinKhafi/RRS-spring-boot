@@ -1,48 +1,101 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Animated Login From</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/dashboard/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/dashboard/img/favicon.png">
+    <title>
+        Login page
+    </title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="/dashboard/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/dashboard/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 </head>
-<body>
-<div class="container">
-    <!-- Pills navs -->
-    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" th:href="@{login}" role="tab"
-               aria-controls="pills-login" aria-selected="true">Login</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="tab-register" data-mdb-toggle="pill" th:href="@{createAccount}" role="tab"
-               aria-controls="pills-register" aria-selected="false">Register</a>
-        </li>
-    </ul>
-    <!-- Pills navs -->
-
-    <!-- Pills content -->
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form th:action="@{/login}" method="post" >
-                <!-- Name input -->
-                <div class="form-outline mb-4">
-                    <input type="text" name="username" id="username" class="form-control" required/>
-                    <label class="form-label" for="username">Username</label>
+<body class="bg-gray-200">
+<main class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('/dashboard/img/208244ff5a563436a24b2316dab93047.png');">
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-12 mx-auto">
+                    <div class="card z-index-0 fadeIn3 fadeInBottom">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
+                                <div class="row mt-3">
+                                    <div class="col-2 text-center ms-auto">
+                                        <a class="btn btn-link px-3" href="javascript:;">
+                                            <i class="fa fa-facebook text-white text-lg"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-2 text-center px-1">
+                                        <a class="btn btn-link px-3" href="javascript:;">
+                                            <i class="fa fa-github text-white text-lg"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-2 text-center me-auto">
+                                        <a class="btn btn-link px-3" href="javascript:;">
+                                            <i class="fa fa-google text-white text-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form role="form" th:object="${user}" th:action="@{/login}" method="post" class="text-start">
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input type="text" id="username" name="username" class="form-control">
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label" for="password" >Password</label>
+                                    <input type="password" id="password" name="password" class="form-control">
+                                </div>
+                                <div class="form-check form-switch d-flex align-items-center mb-3">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                                </div>
+                                <p class="mt-4 text-sm text-center">
+                                    Don't have an account?
+                                    <a th:href="@{/createAccount}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                    <input type="password" id="registerPassword" name="password" class="form-control"/>
-                    <label class="form-label" for="registerPassword">Password</label>
-                </div>
-
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-3">Login</button>
-            </form>
+            </div>
         </div>
     </div>
-    <!-- Pills content -->
-</div>
+</main>
+<!--   Core JS Files   -->
+<script src="/dashboard/js/core/popper.min.js"></script>
+<script src="/dashboard/js/core/bootstrap.min.js"></script>
+<script src="/dashboard/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/dashboard/js/plugins/smooth-scrollbar.min.js"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/dashboard/js/material-dashboard.min.js?v=3.0.0"></script>
 </body>
 </html>

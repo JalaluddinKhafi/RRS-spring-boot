@@ -1,55 +1,177 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/dashboard/img/apple-icon.png}">
-  <link rel="icon" type="image/png" th:href="@{/dashboard/img/favicon.png}">
-  <title>
-    Admin Controller Page
-  </title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <!-- CSS Files -->
-  <link id="page-style" href="/dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>User Home page</title>
+
+    <!--        files for modal-->
+    <!--    link of table -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!--    link of table -->
+
+<!--    <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/modalForm.js}"></script>
+    <!-- CSS FILES -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/booking.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/templatemo-tiya-golf-club.css}" rel="stylesheet">
+    <!--
+
+    TemplateMo 587 Tiya Golf Club
+
+    https://templatemo.com/tm-587-tiya-golf-club
+
+    -->
+    <style>
+        .availableBtn:hover{
+            background-color: #8086be;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
-<body class="g-sidenav-show  bg-gray-200">
-<aside style="background-color: rgb(61 64 91)" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
-  <div th:include="fragments/aside::sidenav"></div>
-  <hr class="horizontal light mt-0 mb-2">
-  <div th:include="fragments/aside::collapseNav"></div>
-  <div th:include="fragments/aside::sidenav-footer"></div>
-</aside>
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-      <div th:include="fragments/aside::navDashboard"></div>
-    <!-- End Navbar -->
-    <div class="container-fluid py-4">
-<!--start body of the user dashboard-->
-
-      <div class="col-12">
-        <h2 class="text-center mb-4">Welcome to Your Dashboard!</h2>
-        <p class="text-center">We're excited to have you here. Explore the features and insights tailored just for you.</p>
-      </div>
+<body>
 
 
-<!--      end body of the user dashboard-->
+<div th:replace="fragments/topNav::userNavbar">
+</div>
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+    <div class="section-overlay">
+        <svg style="margin-top: -6%;" xmlns="http://www.w3.org/2000/svg" viewBox="0 10 1300 370">
+            <path fill="#3D405B" fill-opacity="1"
+                  d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path>
+            <path fill="#3D405B" fill-opacity="1"
+                  d="M0,30C50,20,120,20,180,30C240,40,300,60,360,50C420,40,480,10,540,20C600,30,660,80,720,90C780,100,840,60,900,70C960,80,1020,140,1080,150C1140,160,1200,120,1260,110C1320,100,1380,90,1410,100L1440,110L1440,0L1410,0C1370,0,1300,0,1260,0C1220,0,1160,0,1100,0C1040,0,980,0,920,0C860,0,800,0,740,0C680,0,620,0,560,0C500,0,440,0,380,0C320,0,260,0,200,0C140,0,80,0,40,0L0,0Z"></path>
+        </svg>
     </div>
-  </main>
-  <!--   Core JS Files   -->
-<div th:replace="fragments/aside::settings"></div>
-<!--   Core JS Files   -->
-<script th:src="@{/dashboard/js/plugins/perfect-scrollbar.min.js}"></script>
-<script src="/dashboard/js/material-dashboard.min.js?v=3.0.0"></script>
-</body>
+</section>
+<div class="super_container">
+    <div class="home" style="margin-bottom: 8%;">
+        <div class="home_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content text-center">
+                            <div class="home_title">Search for Available Train</div>
+                            <div class="booking_form_container">
+                                <form id="booking_form" class="booking_form" action="#">
+                                    <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
+                                        <div class="booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                            <div>
+                                                <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Source" name="source" required="required">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Destination" name="destination" required="required">
+                                            </div>
+                                            <div>
+                                                <input type="date" name="departureDate" class="booking_input booking_input_b" placeholder="Departure Date" required="required">
+                                            </div>
+                                            <div>
+                                                <input type="number" name="numberOfSeat" class="booking_input booking_input_b" placeholder="Number of Seat" required="required">
+                                            </div>
+                                        </div>
+                                        <a type="button" href="#table" style="display: flex;justify-content: center;align-items: center;" class="booking_button availableBtn trans_200" id="checkAvailability">Available</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="table" class="top-2 bottom-3">
+    <div class="container col-md-10 border rounded p-10 bottom-3" style="height: 80vh;">
+        <h2 class="text-center mb-4 p-2 m-2 font-weight-bold">All Trains</h2>
+        <div id="schedule-container" th:include="fragments/topNav::userScheduleFragment"></div>
+    </div>
+</section>
+<br>
+<h6 class="text-center" style="color: red">For booking the train, you should <a th:href="@{/login}"> Login</a> to system</h6>
+<div class="container">
+    <br>
+    <hr>
+</div>
+<div th:replace="fragments/topNav::footer">
+</div>
+<script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script defer th:src="@{/js/tableJs.js}"></script>
+<!-- JAVASCRIPT FILES -->
+<!--        <script th:src="@{/js/jquery.min.js}"></script>-->
+<!--        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/animated-headline.js}"></script>
+<!--        <script th:src="@{/js/modernizr.js}"></script>-->
+<script th:src="@{/js/custom.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("checkAvailability").addEventListener("click", function (e) {
+            // Scroll to the target section
+            var targetSection = document.getElementById("table");
+            var scheduleContainerTop = targetSection.getBoundingClientRect().top + window.scrollY;
 
+            window.scrollTo({
+                top: scheduleContainerTop,
+                behavior: "smooth"
+            });
+
+            // Fetch data using AJAX
+            var source = document.querySelector(".booking_input_a.booking_in").value;
+            var destination = document.querySelector(".booking_input_a.booking_out").value;
+            var departureDate = document.querySelector(".booking_input_b[type='date']").value;
+            var numberOfSeats = document.querySelector(".booking_input_b[type='number']").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/user/search", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = xhr.responseText;
+                    if (data.trim() === "") {
+                        document.getElementById("schedule-container").innerHTML = '<p>No trains available for the given criteria.</p>';
+                    } else {
+                        document.getElementById("schedule-container").innerHTML = data;
+                    }
+                } else if (xhr.readyState === 4) {
+                    console.error('Error during AJAX request');
+                }
+            };
+
+            var data = "source=" + encodeURIComponent(source) +
+                "&destination=" + encodeURIComponent(destination) +
+                "&departureDate=" + encodeURIComponent(departureDate) +
+                "&numberOfSeats=" + encodeURIComponent(numberOfSeats);
+
+            // Send the request
+            xhr.send(data);
+        });
+    });
+
+</script>
+
+</body>
 </html>

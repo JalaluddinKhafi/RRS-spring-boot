@@ -22,16 +22,13 @@ public class AdminController {
     private final TrainStatusServiceImpl trainStatusService;
     private final PassengerServiceImpl passengerService;
     private final TicketServiceImpl ticketService;
-    private final TrainStatusRepository trainStatusRepository;
-
-    public AdminController(RouteServiceImpl routeService, UserServiceImpl userServicImpl, TrainServiceImpl trainService, TrainStatusServiceImpl trainStatusService, PassengerServiceImpl passengerService, TicketServiceImpl ticketService, TrainStatusRepository trainStatusRepository) {
+    public AdminController(RouteServiceImpl routeService, UserServiceImpl userServicImpl, TrainServiceImpl trainService, TrainStatusServiceImpl trainStatusService, PassengerServiceImpl passengerService, TicketServiceImpl ticketService) {
         this.routeService = routeService;
         this.userService = userServicImpl;
         this.trainService = trainService;
         this.trainStatusService = trainStatusService;
         this.passengerService = passengerService;
         this.ticketService = ticketService;
-        this.trainStatusRepository = trainStatusRepository;
     }
 
 

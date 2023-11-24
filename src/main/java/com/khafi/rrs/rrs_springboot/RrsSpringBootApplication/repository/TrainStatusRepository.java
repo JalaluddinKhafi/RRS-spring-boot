@@ -4,6 +4,9 @@ import com.khafi.rrs.rrs_springboot.RrsSpringBootApplication.model.TrainStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Repository
 public interface TrainStatusRepository extends JpaRepository<TrainStatus,Long> {
 //    @Query(value = "SELECT t.train_id, t.train_name, ts.st_available_seat, ts.st_booked_seat, ts.st_departure_time, r.r_source, r.r_destination " +
@@ -12,4 +15,6 @@ public interface TrainStatusRepository extends JpaRepository<TrainStatus,Long> {
 //            "JOIN routes r ON ts.route_id = r.r_id", nativeQuery = true)
 //    List<Object[]> getTrainDetails();
     boolean existsByTrainId(Long id);
+    List<TrainStatus> findByRouteSourceAndRouteDestinationAndDepartureDateAndAvailableSeatGreaterThanEqual(
+            String source, String destination, LocalDate departureDate, int numberOfSeats);
 }

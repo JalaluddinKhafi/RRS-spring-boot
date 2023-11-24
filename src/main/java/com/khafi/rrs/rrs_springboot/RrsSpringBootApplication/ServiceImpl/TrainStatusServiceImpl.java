@@ -6,6 +6,9 @@ import com.khafi.rrs.rrs_springboot.RrsSpringBootApplication.service.TrainStatus
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,5 +55,36 @@ public class TrainStatusServiceImpl implements TrainStatusService {
 //    public List<Object[]> getTrainDetails() {
 //        return trainStatusRepository.getTrainDetails();
 //    }
+
+
+        // Other methods...
+
+    public boolean checkTrainAvailability(String source, String destination, String departureDate, int numberOfSeats) {
+        List<TrainStatus> trainStatusList = trainStatusRepository.findAll();
+        for (TrainStatus schedule : trainStatusList) {
+            if (scheduleMatchesCriteria(schedule, source, destination, departureDate, numberOfSeats)) {
+                return true; // Train exists
+            }
+        }
+
+        return false; // Train does not exist
+    }
+
+    private boolean scheduleMatchesCriteria(TrainStatus schedule, String source, String destination, String departureDate, int numberOfSeats) {
+        // Convert departureDate to LocalDate using the correct format
+        LocalDate departureDateAsLocalDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        return schedule.getRoute().getSource().equals(source)
+                && schedule.getRoute().getDestination().equals(destination)
+                && schedule.getDepartureDate().equals(departureDateAsLocalDate)
+                && schedule.getAvailableSeat() >= numberOfSeats;
+    }
+
+    @Override
+    public List<TrainStatus> searchSchedules(String source, String destination, LocalDate departureDate, int numberOfSeats) {
+        return trainStatusRepository.findByRouteSourceAndRouteDestinationAndDepartureDateAndAvailableSeatGreaterThanEqual(
+                source, destination, departureDate, numberOfSeats);
+    }
+
 }
 

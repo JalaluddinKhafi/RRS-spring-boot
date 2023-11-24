@@ -39,6 +39,7 @@ public class Passenger {
     private double TotalPrice;
     @OneToMany(cascade = CascadeType.ALL,
     mappedBy = "passenger")
+    @ToString.Exclude
     private List<Ticket> tickets;
 
     // Getters and setters

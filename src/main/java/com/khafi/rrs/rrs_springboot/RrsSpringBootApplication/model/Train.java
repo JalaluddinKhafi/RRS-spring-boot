@@ -5,7 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -37,6 +38,7 @@ public class Train {
     @OneToMany(
             cascade = CascadeType.ALL,
             mappedBy = "train")
+    @ToString.Exclude
     private List<Ticket> ticket;
     // Getters and setters
 }
